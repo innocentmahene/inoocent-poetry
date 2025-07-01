@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Innocent's Poetry Well</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Georgia&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to right, #fffbe6, #fef6e4);
+      margin: 0;
+      padding: 2rem;
+      color: #3b2f2f;
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #6b4226;
+    }
+    .poem-container {
+      background: #ffffffde;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .poem h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      text-align: center;
+      color: #4a2c2a;
+    }
+    .poem p {
+      white-space: pre-line;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    button {
+      background: #8b5e3c;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+      margin-right: 0.5rem;
+    }
+    button:hover {
+      background: #a8734a;
+    }
+    form {
+      margin-top: 3rem;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: 'Georgia', serif;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Innocent's Poetry Well</h1>
+
+  <div class="poem-container">
+    <div class="poem" id="poemDisplay">
+      <h2 id="poemTitle"></h2>
+      <p id="poemContent"></p>
+    </div>
+    <button onclick="readPoem()">🔊 Read Aloud</button>
+    <button onclick="nextPoem()">➡️ Next Poem</button>
+  </div>
+
+  <form id="commentForm">
+    <h2>Leave a Comment</h2>
+    <input type="text" name="name" placeholder="Your Name" required />
+    <textarea name="message" rows="5" placeholder="Write your thoughts..." required></textarea>
+    <button type="submit">Send Comment</button>
+  </form>
+  <footer>
+  &copy; 2025 depth of life. All rights reserved.
+  contact me naimithjames@gmail.com
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    const poems = [
+      {
+        title: "The Well of Life",
+        content: `Come, my brethren, let us drink from the well of life,
+For the season is ripe, and the waters run deep.
+Now is the time — when joy overflows,
+Let us embrace the sacred irony of life.
+
+Come, my brethren,
+Let us hold hands in peace,
+And drink from the fountain of love,
+For unity is sweetest when it is shared.
+
+But the season is drawing to a close,
+The dry winds begin to whisper.
+Soon the fountains will trickle,
+And the streams of love will fade.
+
+The hands we hold today may slowly drift apart,
+The thirst for life will grow deeper by the second.
+A time will come when children turn from their fathers —
+a wives fight with there loved ones,
+And love will ache in silence.`
+      },
+      {
+        title: "When Night Whispers",
+        content: `When night whispers in silent tones,
+And stars blink stories yet unknown,
+I find your shadow in the moon,
+Dancing to a distant tune.
+
+The winds may steal the warmth of day,
+But in the dark, your soul will stay.
+In every hush, in every sigh,
+I meet your voice, I don't know why.`
+      },  
+      {
+        title: "The Murder of Passion",
+        content: `
+It was a cold night — the night your father died,
+A murder in cold blood,
+A symbol of fury,
+A burst of rage that rang true.
+
+It was the most beautiful thing I ever saw,
+A well-orchestrated departure of a soul.
+A killing so graceful, it felt poetic —
+A crime born of passion, deep at its core.
+
+And though I ache to mourn my husband’s end,
+I pause... to admire the artist’s hand.
+The killer who painted in blood and grief —
+A masterpiece wrapped in silent belief.
+`
+      },
+      {
+        title:"The red flower",
+        content:`
+        I can smell it with my skin —
+The greatest invention of man:
+The red flower.
+
+As beautiful as it may seem,
+Its bloom is a warning,
+For danger awaits.
+The larger it grows, the deeper the doom,
+The heavier the scars it leaves behind —
+The red flower.
+
+It devours all in its path,
+Feeding on the dry, the weak, the defenseless.
+On its rise to glory,
+It cloaks itself in a whispering white mist.
+
+The majestic red flower.
+Some say it’s orange.
+Others say it’s gold.
+But whatever the shade,
+The red flower is no jolly old soul.
+
+        
+        `
+      },
+      {
+        title:"the devil's therapist",
+        content:`
+        The Devil’s Therapist
+This man walks into my office
+In a black suit and black leather Italian shoes.
+This man walks into my office
+With a huge smile on his face.
+This man walks into my office
+Holding a huge ego in his hands.
+
+This man — this sad, mysterious man.
+
+I knew it was all fake the moment I looked into his eyes.
+Another egotistic attempt
+To make everything look fine.
+
+Another patient, I presumed —
+Another psychological case.
+But this case was like no other.
+
+He claimed to be the devil.
+He called himself Lucifer.
+“You don’t know how hard it is to be the devil,” he said.
+
+I saw the pain in his heart
+The moment he said that.
+I wanted to say “I do,”
+Like I always tell my patients…
+But this time, it felt different.
+
+Another metaphoric case?
+I named it The Case of the Lost Devil.
+And so it was —
+I became the devil’s therapist.
+
+At first, I thought it was a metaphor.
+But with each second,
+The metaphor began to feel real.
+And then —
+He showed me his devil face.
+
+A wave of horror clouded my mind.
+Even my thoughts became a case of their own.
+
+It was like hell had been brought to me.
+But strangely…
+It didn’t feel like a punishment.
+
+He wasn’t terrifying —
+He was tired.
+Just another lost soul,
+Seeking help from me.
+
+Another lost soul, I told myself…
+But that’s when it hit me:
+The devil has no soul.
+
+Still, I whispered,
+“This must be God’s will.”
+But if it was,
+Would the devil have complied?
+Or was he here to kill me?
+
+I pushed those thoughts aside.
+I still had a job to do —
+A job that kept a meal on the table
+
+        `
+      },
+      {
+        title:"🌹 HOPES OF LOVE (Polished Version)",
+        content:`
+        
+        An open heart I give to you,
+In hopes that you’ll open yours too.
+I offer you my everything,
+And dream of calling you my queen.
+
+I cast aside my ways of sin,
+In hopes that love will let me win.
+I wait for you to take my hand—
+Mine’s already reaching, where you stand.
+
+I look into your eyes: I see hope.
+Each rejection only helps me cope.
+With every "no" that strikes me through,
+I see more clearly—I love you.
+There’s nothing you can say or do
+To dim the light I see in you.
+
+So take my hands, and be mine,
+And I’ll take yours—you’ll be divine.
+Together, all will turn out right:
+Our love will live beyond the night,
+Forever burning, bold and clever—
+A flame that dies... never
+
+        `
+      },{
+        title:"WHEN MY SOUL DEPARTS",
+        content:`Don’t cry, my brethren,
+        For it’s the end that gives the beginning its meaning.
+        It is the exact moment that has been whispering,
+        Calling me to the commencement of life.
+
+        For it is the irony of it all that makes life less ironic—
+        That makes our lives more precious:
+        That death is the one that calls us to life,
+        That the real symbol of life... is death.
+
+        I sit on the bed as my soul leaves the flesh,
+        Hanging on that last string of life,
+        Clinging to my final breath,
+        And I ask myself—
+        What if the real beginning of life... is death?
+
+        And before I can tell anyone, I find out:
+        Death is the true beginning of life—
+        Sweeter than honey and milk,
+        Life in the silver city.
+        
+        `
+      },
+      {
+        title:"THE SECRET OF THE IRONY OF LIFE",
+        content:`
+        When the day comes to fall,
+        When I have done it all,
+        When my body says goodbye to the soul,
+        When the heavens and hells start to call—
+        Each one asking for my soul.
+
+        That is when I realize the sweetness of life,
+        The real meaning of it all.
+        We do not only live to die,
+        We live to enjoy… and enjoy to die.
+
+        When my eyes open to the other side, I finally realize:
+        We also die to live.
+        And I ask myself—
+        Does the irony of life get more ironic?
+
+        And guess what… it’s deeper than irony.
+        It’s a secret—
+        A secret only you can find.
+        The secret of the irony of life.
+        
+        
+        `
+      },{
+        title:"THE NIGHT",
+        content:`
+        When day becomes night,
+        And you let me hold your hand,
+        The night wind whispers our love,
+        While the sea murmurs our devotion.
+
+        When the stars tell our stories—
+        Unreadable to those who wish us ill—
+        And the white clouds cloak us in their dark shadows,
+        That’s when I look at the moon… and see your reflection.
+
+        The cold night.
+        Your hand in mine.
+        My arms around your slim waist.
+        Your tongue moves, yet no sound escapes—only silence,
+        And your cold lips press to mine, whispering…
+        Memories of our love.
+        
+        
+        
+        `
+      },{
+        title:"THE NIGHT UNDER THE MOON",
+        content:`A silent night—
+        But the voices never cease.
+        The noises never stop.
+        The dishes won’t stop banging,
+        And the moon keeps showing your reflection.
+
+        It’s been three days...
+        But I still hear the noises.
+        Every time I sit beneath the moon,
+        I still hear your screams,
+        Your voice crying, “Let me go.”
+
+        Warm tears find their way from my eyes,
+        Down my sorrow-drenched cheeks,
+        Quiet sobs escaping my lips.
+        And the thought of an apology flashes in my mind—
+        But my ego won't let me.
+        The thought that it's not my fault
+        Spins around my head again and again.
+
+        Every night under the moon
+        Is another night in hell.
+        Every night beneath the dark clouds
+        Brings another rain of tears.
+        And every night in bed alone
+        Is another night... of nightmares.
+        `
+      },
+      {
+        title:"THE SWEETEST PAIN",
+        content:`The pain—the curse of every morning,
+        The weight behind each breath I take,
+        The silence screaming loud and scorning,
+        A heart that bends but will not break.
+
+        The heavy burdens stitched in thread,
+        Of dreams I chase but never claim,
+        Of voices echoing in my head,
+        Whispering sorrow in my name.
+
+        And yet, somehow, I find it sweet—
+        The ache that dances in my chest,
+        A melody of slow defeat,
+        But oddly... it lets me rest.
+
+        It tells me I’m alive, still here,
+        Still standing in the pouring rain,
+        Still wiping off each fallen tear,
+        Still feeling... the sweetest pain.
+
+        It’s not the joy that makes me real,
+        But every scar that I conceal,
+        Every wound that didn’t bleed—
+        But whispered softly: “You still need.”
+
+        And though the nights are cold and long,
+        And hope feels fragile, thin, and worn,
+        This pain has shaped where I belong—
+        A rose that bloomed among the thorns.
+        
+        `
+      }
+
+
+      // Add more poems here
+    ];
+
+    let currentPoem = 0;
+
+    function displayPoem(index) {
+      document.getElementById('poemTitle').innerText = poems[index].title;
+      document.getElementById('poemContent').innerText = poems[index].content;
+    }
+
+    function nextPoem() {
+      currentPoem = (currentPoem + 1) % poems.length;
+      displayPoem(currentPoem);
+    }
+
+    function readPoem() {
+      const poem = poems[currentPoem].title + ". " + poems[currentPoem].content;
+      const utterance = new SpeechSynthesisUtterance(poem);
+      speechSynthesis.speak(utterance);
+    }
+
+    // Initialize
+    displayPoem(currentPoem);
+
+    // EmailJS form handler
+    document.getElementById("commentForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      emailjs.sendForm('service_e8rhgzw', 'template_zmt6cim', this, 'm9L7H6RUt3wx7PmbB')
+        .then(() => {
+          alert("Comment sent successfully!");
+          this.reset();
+        }, (error) => {
+          alert("Failed to send comment: " + error.text);
+        });
+    });
+
+    (function() {
+      emailjs.init("m9L7H6RUt3wx7PmbB");
+    })();
+  </script>
+
+</body>
+</html>
